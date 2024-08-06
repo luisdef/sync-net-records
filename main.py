@@ -11,11 +11,11 @@ from googleapiclient.errors import HttpError
 
 from config import validate
 
-SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+SHEET_SCOPE_ACCESS = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
 load_dotenv()
 SAMPLE_SPREADSHEET_ID = getenv('SHEET_ID')
-RANGE = 'mac-records'
+FOLDER_TABLE = 'mac-records'
 
 
 def main():
@@ -23,14 +23,14 @@ def main():
     
     creds = None
     if os.path.exists("secrets/token.json"):
-        creds = Credentials.from_authorized_user_file("secrets/token.json", SCOPES)
+        creds = Credentials.from_authorized_user_file("secrets/token.json", SHEET_SCOPE_ACCESS)
     if not creds or not creds.valid:
         flow = False
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                "secrets/credentials.json", SCOPES
+                "secrets/credentials.json", SHEET_SCOPE_ACCESS
             )
         if flow:
             creds = flow.run_local_server(port=0)
@@ -43,7 +43,7 @@ def main():
         sheet = service.spreadsheets()
         result = (
             sheet.values()
-            .get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=RANGE)
+            .get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=FOLDER_TABLE)
             .execute()
         )
         values = result.get("values", [])

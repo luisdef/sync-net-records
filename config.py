@@ -10,7 +10,7 @@ def validate() -> bool | Exception:
     """
     Checking if requirements are satisfied.
     - secrets/ directory;
-    - .env file.
+    - .env file and sheet id.
     """
     if not (os.path.exists('secrets/') and (
         os.path.exists('secrets/token.json') or
