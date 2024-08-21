@@ -7,11 +7,9 @@ from utils.text import err_msg
 
 
 def validate() -> bool | Exception: 
-    """
-    Checking if requirements are satisfied.
+    """Checking if requirements are satisfied.
     - secrets/ directory;
-    - .env file and sheet id.
-    """
+    - `.env` file and sheet id."""
     if not (os.path.exists('secrets/') and (
         os.path.exists('secrets/token.json') or
         os.path.exists('secrets/credentials.json')
