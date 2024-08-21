@@ -12,7 +12,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-def trim(docstring):
+def trim(docstring) -> str:
     if not docstring:
         return ''
     lines = docstring.expandtabs().splitlines()
@@ -32,11 +32,11 @@ def trim(docstring):
     return '\n'.join(trimmed)
 
 
-def ok_msg(message: str) -> None:
+def ok_msg(message: str) -> str:
     """Turns message green."""
     return str(f'{bcolors.OKGREEN}{trim(message)}{bcolors.ENDC}')
 
 
-def err_msg(message: str) -> None:
+def err_msg(message: str) -> str:
     """Turns message red."""
     return str(f'{bcolors.FAIL}{trim(message)}{bcolors.ENDC}')
