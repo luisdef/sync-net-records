@@ -1,7 +1,6 @@
 import os.path
 from os import getenv
 from dotenv import load_dotenv
-import json
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials

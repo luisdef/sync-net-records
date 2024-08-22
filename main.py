@@ -3,7 +3,8 @@ from src.get_sheet_data import get_sheet_data
 
 
 def main():
-    list_of_devices_from_google_sheets = get_sheet_data()
+    list_of_devices = get_sheet_data()
+    p(list_of_devices)
 
 
 if __name__ == "__main__":
