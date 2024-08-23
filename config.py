@@ -1,7 +1,6 @@
 import os.path
 from os import getenv
 from dotenv import load_dotenv
-
 from utils.text import ok_msg
 from utils.text import err_msg
 
@@ -20,8 +19,14 @@ def validate() -> bool | Exception:
         raise Exception(err_msg('\'.env\' file not found.'))
     
     load_dotenv()
-    if not (bool(getenv('SHEET_ID'))):
-        raise Exception(err_msg('Sheet ID not found in .env file.'))
+    if (not (bool(getenv('SHEET_ID')))
+        ) or (not (bool(getenv('SHEET_FOLDER')))
+        ) or (not (bool(getenv('HOST_DB')))
+        ) or (not (bool(getenv('DATABASE')))
+        ) or (not (bool(getenv('USER_DB')))
+        ) or (not (bool(getenv('PASSWD_DB')))
+        ):
+        raise Exception(err_msg('Environment variables missing.'))
     
     print(ok_msg('Validation OK.'))
     return True
