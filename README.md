@@ -54,6 +54,22 @@ pip install -r requirements.txt
 
 ## Running the script
 
+> [!WARNING]
+> 
+> Make sure to generate your credentials in the Google
+> Console, and then put it into the `secrets/` directory in the
+> root of this repository.
+
+Once all configurations are done, run the script like so:
+
+```sh
+python3 main.py # In Linux
+```
+
+```ps1
+python.exe main.py # In Windows
+```
+
 ## Contributors
 
 - Luis Felipe Assmann (luis.assmann.1234@gmail.com)
