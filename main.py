@@ -24,19 +24,16 @@ def main():
                                 second=rec['updated_at'].second
                             ).strftime('%d/%m/%Y %H:%M:%S')
     list_from_sheet = get_sheet_data()
-    same = []
     not_same = []
     for s_rec in list_from_sheet:
         for db_rec in list_from_sheet:
             if db_rec['mac'] == s_rec['mac']:
-                same.append(s_rec)
+                continue
             else:
                 if (db_rec['name'] == s_rec['name'] 
                     and db_rec['device'] == s_rec['device'] 
                     and db_rec['mac'] != s_rec['mac']):
                     not_same.append(s_rec)
-    #p(same)
-    p(len(same))
     p(len(not_same))
     p(not_same)
 
