@@ -43,7 +43,6 @@ def get_sheet_data() -> list:
     
     try:
         service = build("sheets", "v4", credentials=credentials)
-
         sheet = service.spreadsheets()
         result = (
             sheet.values()
@@ -66,9 +65,8 @@ def get_sheet_data() -> list:
                 idx = 0
                 for key in keys:
                     record[key] = values[i][idx]
-                    list_of_records.append(record)
                     idx += 1
-        
+                list_of_records.append(record)
         return list_of_records
     except HttpError as err:
         print(err)
