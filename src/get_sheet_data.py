@@ -7,6 +7,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from config import validate
+from utils.text import err_msg
 
 SHEET_SCOPE_ACCESS = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
@@ -52,7 +53,7 @@ def get_sheet_data() -> list:
         values = result.get("values", [])
 
         if not values:
-            print("No data found.")
+            print(err_msg('No data found.'))
             return
 
         keys = None
