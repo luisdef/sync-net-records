@@ -1,41 +1,42 @@
 from pprint import pprint as p
 from src.get_sheet_data import get_sheet_data
 from src.get_db_data import fetch_net_records
-import datetime
+from utils.text import err_msg, ok_msg
+from utils.date_and_time import seconds_between_dates
 
 
 def main():
     list_from_db = fetch_net_records()
-    for rec in list_from_db:
-        rec['created_at'] = datetime.datetime(
-                                year=rec['created_at'].year,
-                                month=rec['created_at'].month,
-                                day=rec['created_at'].day,
-                                hour=rec['created_at'].hour,
-                                minute=rec['created_at'].minute,
-                                second=rec['created_at'].second
-                            ).strftime('%d/%m/%Y %H:%M:%S')
-        rec['updated_at'] = datetime.datetime(
-                                year=rec['updated_at'].year,
-                                month=rec['updated_at'].month,
-                                day=rec['updated_at'].day,
-                                hour=rec['updated_at'].hour,
-                                minute=rec['updated_at'].minute,
-                                second=rec['updated_at'].second
-                            ).strftime('%d/%m/%Y %H:%M:%S')
     list_from_sheet = get_sheet_data()
     not_same = []
-    for s_rec in list_from_sheet:
-        for db_rec in list_from_sheet:
-            if db_rec['mac'] == s_rec['mac']:
+    for sheet_rec in list_from_sheet:
+        for db_rec in list_from_db:
+            if db_rec['mac_address'].upper() == sheet_rec['mac'].upper():
                 continue
             else:
-                if (db_rec['name'] == s_rec['name'] 
-                    and db_rec['device'] == s_rec['device'] 
-                    and db_rec['mac'] != s_rec['mac']):
-                    not_same.append(s_rec)
-    p(len(not_same))
-    p(not_same)
+                if (db_rec['name'] == sheet_rec['name'] 
+                    and db_rec['device'] == sheet_rec['device'] 
+                    and db_rec['mac_address'].upper() != sheet_rec['mac'].upper()):
+                    not_same.append(db_rec)
+    if (len(not_same)) >= 1:
+        print(err_msg('These record(s) are not the same between datasets:'))
+        print(f'{"Nome":<20} | {"Tipo Disp.":<20} | {"MAC":<20}')
+        print('-' * 66)
+        print(
+            seconds_between_dates(
+                d1=not_same[1]["updated_at"],
+                d2=not_same[0]["updated_at"]
+            )
+        )
+        for rec in not_same:
+            if 'mac' in rec:
+                print(f'{rec["name"]:<20} | {rec["device"]:<20} | {rec["mac"]:<20}|{rec["updated_at"]}')
+            else:
+                print(f'{rec["name"]:<20} | {rec["device"]:<20} | {rec["mac_address"]:<20}|{rec["updated_at"]}')
+                
+    else:
+        print(ok_msg('The records are in sync.'))
+    input('\nPress enter to exit...')
 
 
 if __name__ == "__main__":
