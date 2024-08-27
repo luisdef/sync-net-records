@@ -1,14 +1,19 @@
 import os.path
 from os import getenv
 from dotenv import load_dotenv
-from utils.text import ok_msg
 from utils.text import err_msg
 
 
 def validate() -> bool | Exception: 
-    """Checking if requirements are satisfied.
-    - secrets/ directory;
-    - `.env` file and sheet id."""
+    """
+    Checking if requirements are satisfied.
+    
+    Returns:
+        bool: true if everything is ok.
+    
+    Raises:
+        Exception: If something was not found.
+    """
     if not (os.path.exists('secrets/') and (
         os.path.exists('secrets/token.json') or
         os.path.exists('secrets/credentials.json')
@@ -27,8 +32,6 @@ def validate() -> bool | Exception:
         ) or (not (bool(getenv('PASSWD_DB')))
         ):
         raise Exception(err_msg('Environment variables missing.'))
-    
-    print(ok_msg('Validation OK.'))
     return True
 
 
