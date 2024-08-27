@@ -1,5 +1,6 @@
 import sys
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -12,7 +13,27 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-def trim(docstring) -> str:
+def trim(docstring: str) -> str:
+    """
+    Removes whitespace from both ends of a string.
+
+    This function removes all leading and trailing whitespace characters
+    (space, tab, no-break space, etc.) from the given string and returns
+    the resulting trimmed string.
+
+    Args:
+        s (str): The string to trim.
+
+    Returns:
+        docstring (str): The trimmed string without leading or trailing whitespace.
+
+    Examples:
+        >>> trim('   Hello, World!   ')
+        'Hello, World!'
+
+        >>> trim('\\t\\n  Python  \\n\\t')
+        'Python'
+    """
     if not docstring:
         return ''
     lines = docstring.expandtabs().splitlines()
@@ -33,10 +54,27 @@ def trim(docstring) -> str:
 
 
 def ok_msg(message: str) -> str:
-    """Turns message green."""
+    """
+    Turns the message green.
+    
+    Args:
+        message (str): The string to trim.
+
+    Returns:
+        message (str): Returns it ascii colored.
+    """
     return str(f'{bcolors.OKGREEN}{trim(message)}{bcolors.ENDC}')
 
 
 def err_msg(message: str) -> str:
-    """Turns message red."""
+    """
+    Turns the message red.
+    
+    Args:
+        message (str): The string to trim.
+
+    Returns:
+        message (str): Returns it ascii colored.
+    """
     return str(f'{bcolors.FAIL}{trim(message)}{bcolors.ENDC}')
+
