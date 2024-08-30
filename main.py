@@ -22,12 +22,6 @@ def main():
         print(err_msg('These record(s) are not the same between datasets:'))
         print(f'{"Nome":<20} | {"Tipo Disp.":<20} | {"MAC":<20}')
         print('-' * 66)
-        print(
-            seconds_between_dates(
-                d1=not_same[1]["updated_at"],
-                d2=not_same[0]["updated_at"]
-            )
-        )
         for rec in not_same:
             if 'mac' in rec:
                 print(f'{rec["name"]:<20} | {rec["device"]:<20} | {rec["mac"]:<20}|{rec["updated_at"]}')
