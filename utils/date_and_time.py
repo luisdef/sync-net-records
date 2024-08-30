@@ -63,7 +63,7 @@ def parse_datetime_from_pt_br_standard(date_string: str) -> datett:
 def seconds_between_dates(d1, d2):
     d1 = parse_datetime_from_pt_br_standard(d1)
     d2 = parse_datetime_from_pt_br_standard(d2)
-    return (d1-d2).seconds
+    return (d1 - d2).seconds
 
 
 def newer_record(r1, r2) -> list:

@@ -1,4 +1,5 @@
 import os.path
+import os
 from os import getenv
 from dotenv import load_dotenv
 from google.auth.transport.requests import Request
@@ -6,6 +7,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from google.auth.exceptions import RefreshError
 from config import validate
 from utils.text import err_msg
 
@@ -25,7 +27,11 @@ def establish_connection_get_credentials() -> str:
     if not creds or not creds.valid:
         flow = False
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+            try:
+                creds.refresh(Request())
+            except RefreshError:
+                os.remove('secrets/token.json')
+                print(err_msg('Token expired.'))
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 "secrets/credentials.json", SHEET_SCOPE_ACCESS
