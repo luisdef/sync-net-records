@@ -24,9 +24,9 @@ def main():
         print('-' * 66)
         for rec in not_same:
             if 'mac' in rec:
-                print(f'{rec["name"]:<20} | {rec["device"]:<20} | {rec["mac"]:<20}|{rec["updated_at"]}')
+                print(f'{rec["name"]:<20} | {rec["device"]:<20} | {rec["mac"]:<20}')
             else:
-                print(f'{rec["name"]:<20} | {rec["device"]:<20} | {rec["mac_address"]:<20}|{rec["updated_at"]}')
+                print(f'{rec["name"]:<20} | {rec["device"]:<20} | {rec["mac_address"]:<20}')
                 
     else:
         print(ok_msg('The records are in sync.'))

@@ -5,6 +5,11 @@ the forms database and also the application. Once those
 records are perfectly in sync it will do the registration 
 in the router system (Mikrotik).
 
+## TODO
+
+- [ ] Make an update policy (which source will be updated);
+- [ ] Set up a test environment of a RouterOS Mikrotik simulated device;
+
 ## Setting up
 
 To begin with, it is highly recommended to create a 
