@@ -1,14 +1,16 @@
 # Syncing Network Registration Access via MAC Address
 
-Script that will automatically check for updates between 
-the forms database and also the application. Once those 
+Script that will check for updates between 
+the google sheets and also the application database. Once those 
 records are perfectly in sync it will do the registration 
 in the router system (Mikrotik).
 
 ## TODO
 
 - [ ] Make an update policy (which source will be updated);
+- [ ] Update the google sheet;
 - [ ] Set up a test environment of a RouterOS Mikrotik simulated device;
+
 
 ## Setting up
 
