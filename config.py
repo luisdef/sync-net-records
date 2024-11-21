@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from utils.text import err_msg
 
 
-def validate() -> bool | Exception: 
+def validate() -> bool | Exception:
     """
     Checking if requirements are satisfied.
     

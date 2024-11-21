@@ -22,6 +22,8 @@ def main():
     
     # See the records that are in the sheet and are not in database
     # Ask if wants to save the record in the database
+    print(list_from_db)
+    print(list_from_sheet)
 
 if __name__ == "__main__":
     main()
